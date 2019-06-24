@@ -1,0 +1,100 @@
+﻿@model Models.EF.Contact
+@{
+    ViewBag.Title = "Liên Hệ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = (Models.EF.User)ViewBag.user;
+}
+
+@section title{
+    Liên Hệ
+}
+
+@section Bootstrap{
+    <link href="~/Assets/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
+}
+
+@section fs{
+    <script src="~/Assets/Bootstrap/js/bootstrap.min.js"></script>
+}
+
+@section jsFooter{
+    <script src="~/Assets/Client/js/Controller/ContactController.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyANd4kE_XxNG_DP9xy3lb3Zs9ga72RaHJA&callback=initMap"></script>
+
+    <script>
+        // 21.007236, 105.714324
+        function initMap() {
+            var uluru = { lat: 21.007236, lng: 105.714324 };
+            var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                zoom: 15,
+                center: uluru
+            });
+
+            var contentString = '@Html.Raw(Model.Content)';
+            
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString
+            });
+
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                title: 'Địa Chỉ'
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+}
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 style="text-align:center">Thông Tin Liên Hệ</h2>
+            @Html.Raw(Model.Content)
+
+            <br /> <br /> <br />
+            <h2 style="text-align:center">Gửi Phản Hồi</h2>
+            <form>
+                <div class="form-group">
+                    <label>Họ Tên</label>
+                    <input type="text" id="txtName" class="form-control" value="@(user != null ? user.Name : "")" />
+                </div>
+
+                <div class="form-group">
+                    <label>Điện Thoại</label>
+                    <input type="text" id="txtMobile" class="form-control" value="@(user != null ? user.Phone : "")"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Địa Chỉ</label>
+                    <input type="text" id="txtAddress" class="form-control" value="@(user != null ? user.Address : "")"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" id="txtEmail" class="form-control" value="@(user != null ? user.Email : "")"/>
+                </div>
+
+                <div class="form-group">
+                    <label>Nội Dung</label>
+                    <textarea id="txtContent" class="form-control"></textarea>
+                </div>
+                <button id="btnSend" class="btn btn-success">Gửi Phản Hồi</button>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <h2 style="text-align:center">Bản Đồ</h2>
+            <div class="map" id="mapCanvas" style="height:500px">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

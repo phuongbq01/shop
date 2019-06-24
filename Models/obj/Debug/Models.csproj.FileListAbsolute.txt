@@ -1,0 +1,16 @@
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\Models.dll.config
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\Models.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\Models.pdb
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\EntityFramework.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\EntityFramework.SqlServer.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\EntityFramework.xml
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\EntityFramework.SqlServer.xml
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\obj\Debug\Models.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\obj\Debug\Models.pdb
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\PagedList.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\PagedList.Mvc.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\PagedList.xml
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\PagedList.Mvc.xml
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\Common.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Models\bin\Debug\Common.pdb

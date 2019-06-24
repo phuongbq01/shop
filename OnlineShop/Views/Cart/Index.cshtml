@@ -1,0 +1,75 @@
+﻿@model List<OnlineShop.Models.CartItem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var total = (decimal)ViewBag.total;
+}
+
+@section title{
+    Giỏ Hàng
+    }
+
+@section Bootstrap{
+    <link href="~/Assets/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
+    }
+
+@section fs{
+    <script src="~/Assets/Bootstrap/js/bootstrap.min.js"></script>
+    }
+
+@section jsFooter{
+    <script src="/Assets/Client/js/Controller/CartController.js"></script>
+    }
+
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td width="150px" style="text-align:center">Ảnh</td>
+                        <td width="200px" style="text-align:center">Mã Sản Phẩm</td>
+                        <td width="200px" style="text-align:center">Tên Sản Phẩm</td>
+                        <td width="200px" style="text-align:center">Số Lượng</td>
+                        <td width="200px" style="text-align:center">Đơn Giá</td>
+                        <td width="200px" style="text-align:center">Thành Tiền</td>
+                        <td width="100px" style="text-align:center">Xóa</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr> 
+                            <td width="150px" style="text-align:center"><img src="@item.Product.Image" width="100px" height="100px"/></td>
+                            <td width="200px" style="text-align:center" >@item.Product.Code</td>
+                            <td width="200px" style="text-align:center">@item.Product.Name</td>
+                            <td width="200px" style="text-align:center"><input type="text" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" /></td>
+                            <td width="200px" style="text-align:center">@(item.Product.PromotionPrice != null ? item.Product.PromotionPrice.Value.ToString("N0") : item.Product.Price.Value.ToString("N0")) VNĐ</td>
+                            <td width="200px" style="text-align:center">@(((item.Product.PromotionPrice != null ? item.Product.PromotionPrice : item.Product.Price) * item.Quantity).Value.ToString("N0")) VNĐ</td>
+                            <td width="100px" style="text-align:center"><a href="#" class="btn-Delete" data-id="@item.Product.ID">Xóa</a></td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="5" style="text-align:center; font-weight:bold">Tổng</td>
+                        <td style="text-align:center; font-weight:bold">@total.ToString("N0") VNĐ</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <button id="btnUpdate" class="btn">Cập Nhật Giỏ Hàng</button>
+                    <button id="btnDeleteAll" class="btn">Xóa Giỏ Hàng</button>
+                    <button id="btnPayment" class="btn">Thanh Toán</button>
+                </div>
+            </div>
+        }
+        else
+        {
+            <span class="alert alert-danger">Không Có Sản Phẩm Nào Trong Giỏ Hàng</span>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,90 @@
+﻿@model List<OnlineShop.Models.CartItem>
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = (Models.EF.User)ViewBag.user;
+    var total = (decimal)ViewBag.total;
+}
+
+@section title{
+    Thanh Toán
+}
+
+@section Bootstrap{
+    <link href="~/Assets/Bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Assets/Bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
+}
+
+@section fs{   
+    <script src="~/Assets/Bootstrap/js/bootstrap.min.js"></script>
+    }
+
+@section jsFooter{
+    <script src="~/Assets/Client/js/Controller/CartController.js"></script>
+}
+
+<div class="content">
+    <div class="section group">
+        @if (Model.Count > 0)
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td width="150px" style="text-align:center">Ảnh</td>
+                        <td width="200px" style="text-align:center">Mã Sản Phẩm</td>
+                        <td width="200px" style="text-align:center">Tên Sản Phẩm</td>
+                        <td width="200px" style="text-align:center">Số Lượng</td>
+                        <td width="200px" style="text-align:center">Đơn Giá</td>
+                        <td width="200px" style="text-align:center">Thành Tiền</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td width="150px" style="text-align:center"><img src="@item.Product.Image" width="100px" height="100px" /></td>
+                            <td width="200px" style="text-align:center">@item.Product.Code</td>
+                            <td width="200px" style="text-align:center">@item.Product.Name</td>
+                            <td width="200px" style="text-align:center">@item.Quantity</td>
+                            <td width="200px" style="text-align:center">@(item.Product.PromotionPrice != null ? item.Product.PromotionPrice.Value.ToString("N0") : item.Product.Price.Value.ToString("N0")) VNĐ</td>
+                            <td width="200px" style="text-align:center">@(((item.Product.PromotionPrice != null ? item.Product.PromotionPrice : item.Product.Price) * item.Quantity).Value.ToString("N0")) VNĐ</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="5" style="text-align:center; font-weight: bold">Tổng:</td>
+                        <td style="text-align:center; font-weight: bold">@total.ToString("N0") VNĐ</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        }
+    </div>
+
+    <div class="section group">
+        <div class="col-md-6 col-md-offset-3">
+            @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label>Người Nhận</label>
+                    <input name="shipName" value="@(user != null ? user.Name : "")" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Điện Thoại</label>
+                    <input name="mobile" value="@(user != null ? user.Phone : "")" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Địa Chỉ</label>
+                    <input name="address" value="@(user != null ? user.Address : "")" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input name="email" value="@(user != null ? user.Email : "")" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-success">Đặt Hàng</button>
+            }
+        </div>
+    </div>
+</div>

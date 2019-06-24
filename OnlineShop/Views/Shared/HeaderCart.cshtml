@@ -1,0 +1,15 @@
+﻿@model List<OnlineShop.Models.CartItem>
+@{ var total = (decimal)ViewBag.total;}
+<div class="cart">
+    <p>
+        Welcome to our Online Store! <span><a href="/gio-hang">Giỏ Hàng</a></span><div id="dd" class="wrapper-dropdown-2">
+            @(Model.Count != 0 ? Model.Count : 0) item(s) : @total.ToString("N0") VNĐ
+            <ul class="dropdown">
+                @foreach (var item in Model)
+                {
+                    <li>@item.Product.Name - @item.Quantity </li>
+                }
+            </ul>
+        </div>
+    </p>
+</div>

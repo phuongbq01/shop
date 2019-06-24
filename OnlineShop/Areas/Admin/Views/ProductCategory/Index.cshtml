@@ -1,0 +1,78 @@
+﻿@model PagedList.IPagedList<Models.EF.ProductCategory>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Admin - Danh Sách Danh Mục Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section title{
+    Admin - Danh Sách Danh Mục Sản Phẩm
+}
+
+@section header{
+    Danh Sách Danh Mục Sản Phẩm
+}
+
+@section jsFooter{
+    <script src="/Assets/Admin/js/Controller/ProductCategoryController.js"></script>
+}
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="row">
+            <div class="col-md-4" style="padding: 15px 15px">
+                @using (Html.BeginForm("Index", "ProductCategory", FormMethod.Get))
+            {
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" name="searchString" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-2 col-md-offset-5" style="padding:15px">
+                <a class="btn btn-default" style="height:30px; width:150px; font-size:15px" href="/Admin/ProductCategory/Create">Thêm Danh Mục</a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Mã Danh Mục</th>
+                            <th>Tên Danh Mục</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="row_@item.ID">
+                                <td>@item.ID</td>
+                                <td>@item.Name</td>
+                                <td><a href="#" class="btn-productcategory-active" data-id="@item.ID">@(item.Status ? "Kích Hoạt" : "Khóa")</a></td>
+                                <td>
+                                    <a href="/Admin//ProductCategory/Edit/@item.ID">Sửa</a>
+                                    |
+                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn Có Muốn Xóa Bản Ghi Này",
+                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        </div>
+    </div>
+</div>
+

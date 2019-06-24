@@ -1,0 +1,5 @@
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Common\bin\Debug\Common.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Common\bin\Debug\Common.pdb
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Common\obj\Debug\Common.dll
+E:\New folder\ASP.NET MVC\Projects\OnlineShop\Common\obj\Debug\Common.pdb

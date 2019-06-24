@@ -1,0 +1,45 @@
+﻿@model PagedList.IPagedList<Models.EF.Product>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Models.EF.ProductCategory)ViewBag.Category;
+}
+
+@section title{
+    @category.Name
+    }
+
+<div class="content">
+    <div class="content_top">
+        <div class="heading">
+            <h3>@category.Name</h3>
+        </div>
+        <div class="see">
+            <p><a href="/san-pham">See all Products</a></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="section group">
+        @foreach (var item in Model)
+        {
+            var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+            <div class="grid_1_of_4 images_1_of_4">
+                <a href="@url"><img width="210.21px" height="210.21" src="@item.Image" alt="@item.Name" /></a>
+                <h2 style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap">@item.Name </h2>
+                <div class="price-details">
+                    <div class="price-number">
+                        <p style="font-size: 8px; font-weight:bold"><span class="rupees">@(item.PromotionPrice != null ? item.PromotionPrice.Value.ToString("N0") : item.Price.Value.ToString("N0")) VNĐ</span></p>
+                    </div>
+                    <div class="add-cart">
+                        <h4><a href="preview.html">Add to Cart</a></h4>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@Html.PagedListPager(Model, page => Url.Action("Category", "Product", new { page }))
+
+

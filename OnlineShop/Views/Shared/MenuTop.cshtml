@@ -1,0 +1,23 @@
+﻿@model List<Models.EF.Menu>
+@{ var user = (OnlineShop.Models.UserLogin)ViewBag.User;}
+<div class="call">
+    <p><span>Need help?</span> call us <span class="number">0936013497</span></p>
+</div>
+<div class="account_desc">
+    @if (user == null)
+    {
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li><a href="@item.Link">@item.Text</a></li>
+            }
+        </ul>
+    }
+    else
+    {
+        <ul>
+            <li>Xin Chào: <a href="/thong-tin-ca-nhan" target="_self">@user.Name</a></li>
+            <li>@Html.ActionLink("Đăng Xuất", "Logout", "User")</li>
+        </ul>
+    }
+</div>
